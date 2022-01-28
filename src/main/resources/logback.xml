@@ -16,16 +16,22 @@
               class="ch.qos.logback.core.FileAppender">
         <file>${user.home}/elkdemo/logs/elkdemo.log</file>
         <append>true</append>
-        <encoder
-                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C{1.} %m%n</Pattern>
-        </encoder>
+        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+            <jsonFormatter
+                    class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+<!--                <prettyPrint>true</prettyPrint>-->
+            </jsonFormatter>
+            <appendLineSeparator>true</appendLineSeparator>
+        </layout>
     </appender>
 
     <!-- LOG everything at INFO level -->
+
     <root level="info">
-        <appender-ref ref="File" />
         <appender-ref ref="Console" />
+        <appender-ref ref="File"/>
     </root>
+
+
 
 </configuration>
